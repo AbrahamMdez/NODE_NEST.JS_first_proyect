@@ -1,24 +1,33 @@
 import { Controller, Delete, Get, Post, Put, Body, Param } from '@nestjs/common';
 
 import { CreateTaskDto } from './dto/create-task.dto';
-import { request, Response } from 'express';
+
+import { Task } from './Interfaces/Task';
+import { TasksService } from './tasks.service';
 
 @Controller('tasks')
 export class TasksController {
     
+    //Aquí instanciamos nuestro servicio, para poder usarlo en cualquier peticion HTTP
+    constructor(private taskservice: TasksService) {}
     //Esto es un decorador, podemos dejar solo el metodo @GET y nos llevará a la ruta que tengamos en el controlador,
     //pero si le añadimos algo dentro del decorador, nos llevára a esa ruta, no a la ruta por defecto del controlador
     //Ser´´ia así @Get('/test')
     @Get()
     //Esto seria el metodo sin express
-    getTasks(): {hello: string} {
-        return {"hello": "bro"};
+    getTasks(): Task[]  {
+        return this.taskservice.getTasks();
     }
 
     //Aqui usando express, con request, response
     /* getTasks(@Req() req, @Res() res) {
         return res.send('Hello World');
     } */
+
+    @Get(':taskId')
+    getTask(@Param('taskId') taskId: string) {
+        return this.taskservice.getTask(parseInt(taskId));
+    } 
 
     @Post()
     //Le pasamos el requerimiento @Body y le decimos que se va a llamar tarea
