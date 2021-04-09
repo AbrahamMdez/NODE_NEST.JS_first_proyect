@@ -14,11 +14,15 @@ export class TasksController {
     //pero si le añadimos algo dentro del decorador, nos llevára a esa ruta, no a la ruta por defecto del controlador
     //Ser´´ia así @Get('/test')
     @Get()
-    //Esto seria el metodo sin express
-    getTasks(): Task[]  {
+    //Esto seria el metodo sin express y con datos internos, sin usar BBDD
+    /* getTasks(): Task[]  {
+        return this.taskservice.getTasks();
+    } */
+
+    //Este ejemplo es usando MongoDB como BBDD
+    getTasks(): Promise<Task[]>  {
         return this.taskservice.getTasks();
     }
-
     //Aqui usando express, con request, response
     /* getTasks(@Req() req, @Res() res) {
         return res.send('Hello World');
@@ -26,7 +30,7 @@ export class TasksController {
 
     @Get(':taskId')
     getTask(@Param('taskId') taskId: string) {
-        return this.taskservice.getTask(parseInt(taskId));
+        return this.taskservice.getTask(taskId);
     } 
 
     @Post()
