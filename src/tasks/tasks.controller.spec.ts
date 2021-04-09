@@ -15,4 +15,8 @@ describe('TasksController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+  /* it('should be a string', () => {
+    expect(TasksController.getTasks()).toBe('Hello World!');
+  }); */
 });
