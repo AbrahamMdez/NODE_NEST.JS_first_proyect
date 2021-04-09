@@ -15,8 +15,25 @@ describe('TasksController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+  
+  const task = {
+    "name": "name",
+    "surname": "surname"
+  };
 
-  /* it('should be a string', () => {
-    expect(TasksController.getTasks()).toBe('Hello World!');
-  }); */
+  it('method createTaks POST should send a string', () => {
+    expect(controller.createTaks(task)).toBe('Creating a task');
+  });
+
+  it('method getTasks GET should received a string', () => {
+    expect(controller.getTasks()).toBe('Retornando tareas');
+  });
+  
+  it('method updateTask PUT should send a string', () => {
+    expect(controller.updateTask()).toBe('Updating a task');
+    expect(controller.updateTask()).toEqual('Updating a task');
+
+    expect(controller.updateTask()).not.toEqual('... a task');
+  });
+
 });
