@@ -35,8 +35,8 @@ export class TasksController {
 
     @Post()
     //Le pasamos el requerimiento @Body y le decimos que se va a llamar tarea
-    createTaks(@Body() task: CreateTaskDto): string {
-        return 'Creating a task';
+    createTask(@Body() task: CreateTaskDto): string {
+        return this.taskservice.createTask(task);
     }
 
     @Put(':id')
